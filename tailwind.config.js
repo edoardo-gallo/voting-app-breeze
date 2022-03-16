@@ -6,6 +6,12 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
+    safelist: [
+        'bg-purple',
+        'bg-yellow',
+        'bg-green',
+        'bg-red',
+    ],
 
     theme: {
         extend: {
@@ -25,7 +31,12 @@ module.exports = {
             spacing: {
                 22: '5.5rem',
                 70: '17.5rem',
+                76: '19rem',
+                104: '26rem',
                 175: '43.75rem'
+            },
+            scale: {
+                '103': '1.03'
             },
             maxWidth: {
                 custom: '68.5rem'

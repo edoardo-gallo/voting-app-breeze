@@ -41,4 +41,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function ideas() {
+        return $this->hasMany(Idea::class);
+    }
+
+    public function getAvatar()
+    {
+        $randomInteger = rand(1,36);
+
+        return 'https://www.gravatar.com/avatar/'
+        .md5($this->email)
+        .'?s=200'
+        .'&d=mp';
+    }
+
+    public function getGravatar(): string
+    {
+        return
+            'https://www.gravatar.com/avatar/'
+            .md5($this->email)
+            .'?s200'
+            .'&d=retro';
+    }
 }
