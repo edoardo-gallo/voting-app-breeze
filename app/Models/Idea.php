@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Exceptions\DuplicateVoteException;
+use App\Exceptions\VoteNotFoundException;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,7 +38,51 @@ class Idea extends Model
     public function status()
     {
         return $this->belongsTo(Status::class);
-    } 
+    }
+    
+    public function votes()
+    {
+        return $this->belongsToMany(User::class, 'votes');
+    }
+
+    public function isVotedByUser(?User $user)
+    {
+
+        if(!$user) {
+            return false;
+        }
+
+        return Vote::where('user_id', $user->id)
+            ->where('idea_id', $this->id)
+            ->exists();
+    }
+
+    public function vote(User $user)
+    {
+        if($this->isVotedByUser($user)){
+            throw new DuplicateVoteException;
+        } else {
+            Vote::create([
+                'idea_id' =>  $this->id,
+                'user_id' => $user->id, 
+            ]);
+        }
+
+        
+    }
+    
+    public function removeVote(User $user)
+    {
+        $voteToDelete = Vote::where('idea_id', $this->id)
+        ->where('user_id', $user->id)
+        ->first();
+
+        if($voteToDelete){
+            $voteToDelete->delete();
+        } else {
+            throw new VoteNotFoundException;
+        }
+    }
 
     // not good having to deal with styles in the data layer
     public function getStatusClasses()

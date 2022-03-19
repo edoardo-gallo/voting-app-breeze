@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Idea;
 use App\Http\Requests\StoreIdeaRequest;
 use App\Http\Requests\UpdateIdeaRequest;
+use App\Models\Vote;
 
 class IdeaController extends Controller
 {
@@ -15,9 +16,7 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        return view('idea.index', ['ideas'=> Idea::with('user', 'category', 'status')
-                        ->latest('id')
-                        ->simplePaginate(Idea::PAGINATION_COUNT)]);        
+        return view('idea.index', );        
     }
 
     /**
@@ -51,6 +50,7 @@ class IdeaController extends Controller
     {
         return view('idea.show', [
             'idea' => $idea,
+            'votesCount' => $idea->votes()->count(),
         ]);
     }
 
