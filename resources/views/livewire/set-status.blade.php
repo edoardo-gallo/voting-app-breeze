@@ -15,7 +15,11 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
     </button>
-    <div x-cloak x-show="isOpen" x-transition.origin.top.left.duration.300ms @click.away="isOpen = false"
+    <div 
+        x-cloak 
+        x-show="isOpen" 
+        x-transition.origin.top.left.duration.300ms 
+        @click.away="isOpen = false"
         class="absolute z-20 w-76 text-left font-semibold text-sm bg-white shadow-dialog rounded-xl mt-2">
         <form 
             wire:submit.prevent="setStatus"
@@ -62,7 +66,7 @@
                         </svg>
                         <span class="ml-1">Attach</span>
                     </button>
-                    <button type="submit" class="flex items-center justify-center w-1/2 h-11 text-xs text-white bg-blue font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duation-150 ease-in px-6 py-3">
+                    <button type="submit" class="flex items-center justify-center w-1/2 h-11 text-xs text-white bg-blue font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duation-150 ease-in px-6 py-3 disabled:opacity-50">
                         
                         <span class="ml-1">Update</span>
                     </button>

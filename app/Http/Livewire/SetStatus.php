@@ -2,16 +2,18 @@
 
 namespace App\Http\Livewire;
 
-use App\Mail\IdeaStatusUpdatedMailable;
 use App\Models\Idea;
-use Illuminate\Http\Response;
 use Livewire\Component;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\IdeaStatusUpdatedMailable;
 
 class SetStatus extends Component
 {
 
     public $idea;
     public $status;
+    public $notifyAllVoters;
 
     public function mount(Idea $idea)
     {
@@ -37,7 +39,7 @@ class SetStatus extends Component
 
     public function notifyAllVoters()
     {
-        $voters = $this->idea->votes()
+        $this->idea->votes()
             ->select('name', 'email')
             ->chunk(100, function ($voters) {
                 foreach($voters as $user) {
@@ -49,7 +51,7 @@ class SetStatus extends Component
 
         
     }
-
+ 
     public function render()
     {
         return view('livewire.set-status');

@@ -27,17 +27,44 @@
 
                 <div x-data="{ isOpen: false}" class="flex items-center space-x-2">
                     <div class="{{$idea->getStatusClasses() }} text-white text-xs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">{{ $idea->status->name}} </div>
-                    <button 
-                        @click="isOpen= !isOpen" 
-                        class="relative bg-slate-100 hover:bg-slate-300 rounded-full h-7 px-2 py-2 transition duration-300 ease-in pb-3">
-                    <svg fill="currentColor" width="24" height="6"><path d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z" style="color: rgba(163, 163, 163, .5)">
-                    </svg>
-                    {{-- x-cloak used because when you refresh, the buttons are shown for a fraction of seconds  --}}
-                    <ul x-cloak x-show="isOpen" x-transition.origin.top.left.duration.300ms @click.away="isOpen = false" class="absolute w-44 text-left font-semibold bg-white shadow-dialog rounded-xl py-3 ml-8">
-                        <li><a href="#" class="hover:bg-slate-100 block px-5 py-3 transition duration-300 ease-in">Mark as spam</a></li>
-                        <li><a href="#" class="hover:bg-slate-100 block px-5 py-3 transition duration-300 ease-in">Delete post</a></li>
-                    </ul>
-                    </button>
+                        <div class="relative">
+                            <button 
+                                @click="isOpen= !isOpen" 
+                                class="relative bg-slate-100 hover:bg-slate-300 rounded-full h-7 px-2 py-2 transition duration-300 ease-in pb-3">
+                                <svg fill="currentColor" width="24" height="6"><path d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z" style="color: rgba(163, 163, 163, .5)">
+                                </svg>                        
+                            </button>
+                            {{-- x-cloak used because when you refresh, the buttons are shown for a fraction of seconds  --}}
+                            <ul x-cloak x-show="isOpen" x-transition.origin.top.left.duration.300ms @click.away="isOpen = false" class="absolute w-44 text-left font-semibold bg-white shadow-dialog rounded-xl py-3 ml-8">
+                                @can('update', $idea)
+                                <li>
+                                    <a 
+                                        @click="
+                                            isOpen = false 
+                                            $dispatch('custom-show-edit-modal')
+                                        "
+                                        href="#" 
+                                        class="hover:bg-slate-100 block px-5 py-3 transition duration-300 ease-in"
+                                    >
+                                    Edit Idea
+                                    </a>
+                                </li>
+                                @endcan
+                                <li>
+                                    <a
+                                        @click="
+                                            isOpen = false 
+                                            $dispatch('custom-show-delete-modal')
+                                        "
+                                        href="#" 
+                                        class="hover:bg-slate-100 block px-5 py-3 transition duration-300 ease-in"
+                                    >
+                                    Delete Idea
+                                    </a>
+                                </li>
+                                <li><a href="#" class="hover:bg-slate-100 block px-5 py-3 transition duration-300 ease-in">Mark as spam</a></li>                        
+                            </ul>
+                        </div>
                 </div>
 
                 </div>
