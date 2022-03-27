@@ -6,9 +6,8 @@ use App\Models\Idea;
 use Livewire\Component;
 use Illuminate\Http\Response;
 
-class DeleteIdea extends Component
+class MarkIdeaAsNotSpam extends Component
 {
-
     public $idea;
     
     public function mount(Idea $idea)
@@ -16,19 +15,20 @@ class DeleteIdea extends Component
         $this->idea = $idea;
     }
 
-    public function deleteIdea()
+    public function markIdeaNotSpam()
     {
-        if(auth()->guest() || auth()->user()->cannot('delete', $this->idea)) {
+        if(! auth()->check() || ! auth()->user()->isAdmin()) {
             abort(Response::HTTP_FORBIDDEN);
         }
         
-        Idea::destroy($this->idea->id);
+        $this->idea->spam_count = 0;
+        $this->idea->save();
 
-        return redirect()->route('idea.index');
+        $this->emit('ideaMarkedAsNotSpam');
     }
-
+    
     public function render()
     {
-        return view('livewire.delete-idea');
+        return view('livewire.mark-idea-as-not-spam');
     }
 }

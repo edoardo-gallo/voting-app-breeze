@@ -11,12 +11,12 @@
 
 <livewire:idea-show :idea="$idea" :votesCount="$votesCount"/>
 
-@can('update', $idea)
-    <livewire:edit-idea :idea="$idea"/> 
-     
-@endcan
+{{-- @prepend('modals')  NON FUNZIONA--}}
+    <x-modals-container :idea="$idea" />
+{{-- @endprepend --}}
 
-<livewire:delete-idea :idea="$idea"/>
+
+
 
 <div class="relative comments-container space-y-6 ml-22 my-8 mt-1 pt-4">
     {{-- @foreach (range(1,3) as $comment)
