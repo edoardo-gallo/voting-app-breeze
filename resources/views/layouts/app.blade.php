@@ -16,8 +16,11 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+
+        {{-- @stack('modals') NON FUNZIONA --}}
     </head>
     <body class="font-sans bg-gray-background text-gray-900 text-sm">
+        
         <header class="flex flex-col md:flex-row items-center justify-between px-8 py-4">
 
             <a href="#" class="ml-4">
@@ -52,6 +55,8 @@
                 </a>
             </div>
         </header>
+        {{-- SPLINE --}}
+        {{-- <iframe src='https://my.spline.design/logo3d-201642e9f7dda3852adc225fdfdd6e2b/' frameborder='0' width='100%' height='100%'></iframe> --}}
         <main class="container mx-auto max-w-custom flex flex-col md:flex-row">
             <div class="w-70 mx-auto md:mx-0 md:mr-5">
                 <div
@@ -101,6 +106,7 @@
                 </div>
             </div>
         </main>
+        
         @livewireScripts
     </body>
 </html>
