@@ -11,6 +11,8 @@
 
 <livewire:idea-show :idea="$idea" :votesCount="$votesCount"/>
 
+<x-notification-success />
+
 {{-- @prepend('modals')  NON FUNZIONA--}}
     <x-modals-container :idea="$idea" />
 {{-- @endprepend --}}
