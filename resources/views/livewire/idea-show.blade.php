@@ -27,7 +27,7 @@
                     <div>{{ $idea->created_at->diffForHumans()}}</div>
                     <div>&bull;</div>
                     <div>{{$idea->category->name}}</div>
-                    <div class="text-slate-500">comments 3</div>
+                    <div class="text-slate-500">{{ $idea->comments->count() }} comments</div>
                 </div>
 
                 <div x-data="{ isOpen: false}" class="flex items-center space-x-2">
@@ -115,41 +115,7 @@
 
         <div class="flex items-center space-x-4 ml-6">
 
-            <div 
-                x-data="{ isOpen: false}"
-                class="relative">
-                <button 
-                        type="button" 
-                        @click="isOpen= !isOpen"
-                        class="flex items-center justify-center h-11 w-32 text-sm text-white bg-blue font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duation-150 ease-in px-6 py-3">
-                    Reply
-                </button>
-
-                <div 
-                    x-cloak 
-                    x-show="isOpen" 
-                    x-transition.origin.top.left.duration.300ms 
-                    @click.away="isOpen = false" 
-                    class="absolute z-10 w-104 text-left font-semibold text-sm bg-white shadow-dialog rounded-xl mt-2">
-                    <form action="" class="space-y-4 px-4 py-6">
-                        <div>
-                            <textarea name="post_comment" id="post_comment" cols="30" rows="4" class="w-full text-sm bg-slate-100 rounded-xl placeholder-slate-900 border-none px-4 py-2" placeholder="go ahead and don't be shy"></textarea>
-                        </div>
-
-                        <div class="flex items-center space-x-3">
-                            <button type="button" class="flex items-center justify-center h-11 w-1/2 text-sm text-white bg-blue font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duation-150 ease-in px-6 py-3">
-                                Post comment
-                            </button>
-                            <button type="button" class="flex items-center justify-center w-32 h-11 text-xs bg-slate-200 font-semibold rounded-xl border border-slate-200 hover:border-slate-400 transition duation-150 ease-in px-6 py-3">
-                                <svg class="text-slate-600 w-4 trasform -rotate-45" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-                                </svg>
-                                <span class="ml-1">Attach</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <livewire:add-comment :idea="$idea" />
             @admin
                 <livewire:set-status :idea="$idea" />  
             @endadmin                

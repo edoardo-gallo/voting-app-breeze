@@ -13,7 +13,7 @@
     x-data="{ isOpen : false }"
     x-show="isOpen"
     x-init="
-        window.livewire.on('{{ $eventToCloseModal }}', () => {
+        Livewire.on('{{ $eventToCloseModal }}', () => {
             isOpen = false 
         })
     "

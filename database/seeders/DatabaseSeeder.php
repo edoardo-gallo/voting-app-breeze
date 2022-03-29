@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Idea;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Status;
 use App\Models\User;
 use App\Models\Vote;
@@ -42,7 +43,7 @@ class DatabaseSeeder extends Seeder
         
         
 
-        Idea::factory(100)->create();
+        Idea::factory(100)->existing()->create();
 
         //  generate unique votes
 
@@ -56,6 +57,12 @@ class DatabaseSeeder extends Seeder
                 }
                 
             }
+        }
+
+        // Generate comments for ideas
+
+        foreach (Idea::all() as $idea) {
+            Comment::factory(5)->existing()->create(['idea_id' => $idea->id]); 
         }
     }
 }

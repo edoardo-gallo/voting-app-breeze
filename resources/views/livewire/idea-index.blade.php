@@ -57,7 +57,7 @@
                 <div>{{ $idea->created_at->diffForHumans()}}</div>
                 <div>&bull;</div>
                 <div>{{$idea->category->name}}</div>
-                <div class="text-slate-500">comments 3</div>
+                <div class="text-slate-500">{{ $idea->comments_count }} comments</div>
             </div>
 
             <div x-data="{ isOpen: false}" class="flex items-center space-x-2 mt-4 md:mt-0">

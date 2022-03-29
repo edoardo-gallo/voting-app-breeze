@@ -61,8 +61,7 @@
             <div class="mx-auto w-70 mt-12">
                 <img src="{{ asset('img/no-ideas.svg')}}" alt="No Ideas" class="mx-auto grayscale">
                 <div class="text-slate-400 text-center font-bold mt-6 ">No ideas were found...</div>
-            </div>    
-            
+            </div>           
 
         @endforelse
         
