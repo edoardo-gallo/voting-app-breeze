@@ -1,7 +1,7 @@
 {{-- Cases for when is not a full page refresh --}}
 @props([
     'redirect' => false, // full page refresh are redirect
-    'messageToDisplay' => '', // if full page refresh will come from the session variable if not will come from the event in livewire
+    'messageToDisplay' => '', // if full page refresh, will come from the session variable, if not will come from the event in livewire
 ])
 
 <div 
